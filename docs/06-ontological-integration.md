@@ -217,3 +217,63 @@ The logging system operates on a **three-level hierarchy**, allowing The Bridge 
   }
 }
 ```
+
+#### 6.3.3.4 LOG to RAP (Report) Transformation
+
+Automatic **Daily Activity Report** generation from the immutable **LOG** ledger.  
+Transformation rules define filters, aggregations, formats, and delivery channels.
+
+```json
+{
+  "rap_configuration": {
+    "source": "LOG",
+    "transformation_rules": {
+      "daily_user_activity": {
+        "filter": "WHERE actor = :user AND date = :today",
+        "aggregate": [
+          "COUNT(*) as total_actions",
+          "COUNT(DISTINCT entity_id) as processes_touched",
+          "AVG(duration) as avg_process_time",
+          "SUM(CASE WHEN outcome = 'INTERESTED' THEN 1 ELSE 0 END) as conversions"
+          ],
+        "output_format": "PDF",
+        "delivery": "email_at_18:00"
+      },
+      "process_efficiency": {
+        "group_by": "process_type",
+        "metrics": ["k_coefficient", "cycle_time", "error_rate"],
+        "visualization": "dashboard_widget"
+      }
+    }
+  }
+}
+```
+
+#### 6.3.3.5 LOG to RAP (Report) Transformation — FileMaker Script to Generate RAP Report
+
+```filemaker
+// Generate Daily Activity Report from LOG
+Set Variable [ $user ; Value: Get ( AccountName ) ]
+Set Variable [ $date ; Value: Get ( CurrentDate ) ]
+
+// Query LOG table (conceptual; replace with your SQL/CF/plugin approach)
+Set Variable [ $sql ; Value: "
+   SELECT
+      COUNT(*) AS total_actions,
+      COUNT(DISTINCT entity_id) AS processes,
+      AVG(CASE WHEN action = 'call_completed'
+         THEN JSON_EXTRACT(metadata, '$.duration') END) AS avg_duration
+   FROM LOG
+   WHERE actor = ? AND DATE(timestamp) = ?
+" ]
+
+// Execute query (via plugin/CF) and capture results
+Perform SQL [ Query: $sql ; Parameters: $user & ¶ & $date ]
+Set Variable [ $results ; Value: Get ( ScriptResult ) ]
+
+// Render report (HTML) using a template
+Set Variable [ $report_html ; Value: Process_RAP_Template ( $results ) ]
+
+// Produce PDF and deliver (email/schedule handled by wrapper script)
+Perform Script [ "Generate_PDF" ; Parameter: $report_html ]
+```
