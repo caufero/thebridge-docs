@@ -16,3 +16,13 @@
 - `PHO259999` → 9999th phone call  
 - `PHO2510000` → 10,000th phone call (auto-expands to 5 digits)  
 - `PHO25100000` → 100,000th phone call (auto-expands to 6 digits)
+
+---
+
+### FileMaker Implementation
+
+#### Simple
+```filemaker
+DNA_Generator = "PHO" & Right ( Year ; 2 ) & SerialIncrement ( PHO_Counter ; 4 )
+
+// SerialIncrement automatically manages digit overflow
