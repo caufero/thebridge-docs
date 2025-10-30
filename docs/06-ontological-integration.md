@@ -47,3 +47,58 @@ End If
 
 Exit Script [Result: $dna]
 ```
+
+## 6.2 Correct Nomenclature for Architecture (CRITICAL)
+
+| **Layer**     | **Code** | **Description**               |
+|----------------|----------|-------------------------------|
+| **Processes**  | CMP      | Components / Catalog          |
+| **Entities**   | ETY      | Entity / Orchestrator         |
+| **Logs**       | LOG      | Actions / Registry            |
+
+Each layer represents a core dimension of *The Bridge* ontology:
+
+- **CMP (Processes)** define reusable templates and behaviors.  
+- **ETY (Entities)** orchestrate process executions and hold contextual data.  
+- **LOG (Logs)** capture every action, transition, and state change.
+
+Together, they ensure that *every operation in the system is observable, traceable, and reproducible* — forming the backbone of the 3P3 architectural model.
+
+## 6.3 CMP-ETY-LOG Architecture Clarification
+
+### CMP (Components)
+
+The **CMP** table is the foundation of the system. It contains *everything that can exist* — both **process templates** and **real instances** that hold business data.
+
+#### Contents of CMP
+- Process templates (e.g., `PROC_PHO`, `PROC_RCH`)
+- Real instances with business data and attributes (e.g., `PHO250001` with customer name, duration, etc.)
+- Attributes
+- Meta-attributes
+
+#### CMP Table Definition and Example
+The `CMP` table stores both templates and instances in a unified, flexible structure.
+
+```sql
+CREATE TABLE CMP (
+    ID UUID PRIMARY KEY,
+    DNA_Code TEXT UNIQUE,
+    Template_ID TEXT,
+    Template_JSON JSON,
+    Instance_JSON JSON,
+    Attributes_Metadata_JSON JSON,
+    Created TIMESTAMP,
+    Creator TEXT,
+    Modified TIMESTAMP,
+    Modifier TEXT
+);
+```
+
+-- Example of Instance_JSON in CMP (Phone Call: PHO250001)
+```json
+{
+    "caller": "Mario",
+    "duration": 18,
+    "outcome": "Sale"
+}
+```
