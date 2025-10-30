@@ -10,3 +10,7 @@
 - **Keyboard-first** where possible — tab order, quick actions, Enter-to-commit.
 - **Clear feedback** — toasts/spinners for long ops; disable buttons during actions.
 - **Error surfaces** — inline, human-readable, with remediation hints.
+
+## 7.1 UI References
+### 7.1.2 — Process Manager
+![Process Manager](assets/img/process_manager.png)
