@@ -1,0 +1,8 @@
+site_name: The Bridge Documentation
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Ontology:
+      - Overview: ontology/overview.md
+      - Entity Model: ontology/entity-model.md
