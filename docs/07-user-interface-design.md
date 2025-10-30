@@ -46,3 +46,21 @@ This means the Process Manager directly reflects the organization’s operationa
 - Defines **operational relationships** between processes.  
 - Configures **automatic/manual triggers**.  
 - Establishes **dependencies and workflow orchestration** between processes.
+
+### 7.3.4 Example of a Process Template Definition (Phone Call)
+```json
+{
+  "process": {
+    "code": "PHO",
+    "name": "Phone Call Management",
+    "description": "Manages inbound and outbound customer phone calls",
+    "version": "1.0",
+    "family": "COMMUNICATION",
+    "standard_duration": 300,
+    "k_target": 1.5,
+    "business_value": "high",
+    "frequency": "50-100/day"
+  }
+}
+```
+
