@@ -22,7 +22,7 @@
 ### FileMaker Implementation
 
 #### Simple
-```filemaker
+```markdown
+```plaintext
 DNA_Generator = "PHO" & Right ( Year ; 2 ) & SerialIncrement ( PHO_Counter ; 4 )
-
 // SerialIncrement automatically manages digit overflow
