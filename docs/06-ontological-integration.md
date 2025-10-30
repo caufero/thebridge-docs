@@ -172,3 +172,47 @@ Example of data in LOG for same Phone Call (PHO250001)
     "completed": "Triggered OFC"
 }
 ```
+
+#### 6.3.3.3 Log Granularity (Three-Level Hierarchy)
+
+The logging system operates on a **three-level hierarchy**, allowing The Bridge to record activities at varying levels of depth and frequency. This ensures both high-level summaries and precise traceability for every process event.
+
+##### 6.3.3.3.1 Levels of Granularity
+
+```json
+"L1_PROCESS": {
+  "description": "Major lifecycle events",
+  "frequency": "low",
+  "examples": ["process_created", "process_completed", "process_archived"],
+  "data_captured": {
+    "process_id": "PHO250001",
+    "template_version": "V1",
+    "total_duration": 240,
+    "k_coefficient": 1.35
+  }
+},
+
+"L2_ACTIVITY": {
+  "description": "Workflow transitions and significant actions",
+  "frequency": "medium",
+  "examples": ["status_change", "assignment_change", "approval_given"],
+  "data_captured": {
+    "from_state": "NEW",
+    "to_state": "IN_PROGRESS",
+    "transition_reason": "call_started",
+    "responsible_user": "USR_SARA"
+  }
+},
+
+"L3_ATOMIC": {
+  "description": "Every attribute modification",
+  "frequency": "high",
+  "examples": ["field_updated", "validation_failed", "auto_correction"],
+  "data_captured": {
+    "attribute": "caller_name",
+    "old_value": "Rossi",
+    "new_value": "Mario Rossi",
+    "change_reason": "user_enrichment",
+    "timestamp_precise": "2025-09-17T09:16:23.456Z"
+  }
+}
