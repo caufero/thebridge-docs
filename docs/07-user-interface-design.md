@@ -12,5 +12,10 @@
 - **Error surfaces** — inline, human-readable, with remediation hints.
 
 ## 7.1 UI References
-### 7.1.2 — Process Manager
+
+### 7.1.1 Process Manager
 ![Process Manager](assets/img/process_manager.png)
+
+### 7.1.2 Instance Manager
+![Process Manager](assets/img/instance_manager_1.png)
+![Process Manager](assets/img/instance_manager_2.png)
