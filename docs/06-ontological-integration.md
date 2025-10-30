@@ -94,11 +94,81 @@ CREATE TABLE CMP (
 );
 ```
 
--- Example of Instance_JSON in CMP (Phone Call: PHO250001)
+Example of Instance_JSON in CMP (Phone Call: PHO250001)
 ```json
 {
     "caller": "Mario",
     "duration": 18,
     "outcome": "Sale"
+}
+```
+
+### ETY (Entities)
+
+The **ETY** table represents everything that exists *right now* — the live orchestration layer of the system. It is responsible for managing **workflow states**, **transitions**, and **responsible parties**, but it does **not** hold business data.
+
+#### Contents of ETY
+- Everything that exists now  
+- Workflow orchestration **only**  
+- States, transitions, and responsible parties  
+- No business data (business data lives in CMP)
+
+#### ETY Table Definition and Example
+The `ETY` table manages the dynamic behavior of active processes.
+
+```sql
+CREATE TABLE ETY (
+    ID UUID PRIMARY KEY,
+    Entity_ID TEXT UNIQUE,
+    Process_Type TEXT,
+    Workflow_State TEXT,
+    Workflow_JSON JSON,
+    Responsible TEXT,
+    Controller TEXT,
+    Started_at TIMESTAMP,
+    Completed_at TIMESTAMP
+);
+```
+
+Example of data in ETY for same Phone Call (PHO250001_ORCH)
+```json
+{
+    "status": "In Progress",
+    "responsible": "Sara"
+}
+```
+
+### LOG (Logs)
+
+The **LOG** table is the immutable history of everything that has happened in the system.  
+It serves as a **complete audit trail** — recording every action, change, and event that occurs during a process lifecycle.
+
+#### Contents of LOG
+- Everything that has happened  
+- Immutable history of every action  
+- Complete audit trail of the system  
+
+#### LOG Table Definition and Example
+The `LOG` table captures and preserves all events and transitions across processes and entities.
+
+```sql
+CREATE TABLE LOG (
+    ID UUID PRIMARY KEY,
+    Log_ID UUID,
+    Entity_ID TEXT,
+    Log_Level TEXT,
+    Action TEXT,
+    Actor TEXT,
+    Changes_JSON JSON,
+    Metadata_JSON JSON,
+    Timestamp TIMESTAMP
+);
+```
+
+Example of data in LOG for same Phone Call (PHO250001)
+```json
+{
+    "created": "Updated duration",
+    "completed": "Triggered OFC"
 }
 ```
