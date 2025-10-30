@@ -2,16 +2,16 @@
 
 ## 6.1 Instance DNA Format
 
-### Format
+### 6.1.1 Format
 `PRXYYNNNN`
 
-#### Where
+#### 6.1.1.1 Where
 - `PRX` → 3-letter **process code** (e.g., `TSK`, `RCH`, `TEH`, `PHO`, `OFC`, `BOM`, etc.)
 - `YY` → **Year** (e.g., `25` for 2025)
 - `NNNN` → **Sequential number** with anti-collision logic for multi-user environments.  
   Starts at 4 digits and automatically expands as needed.
 
-#### Examples
+#### 6.1.1.2 Examples
 - `PHO250001` → First phone call in 2025  
 - `PHO259999` → 9999th phone call  
 - `PHO2510000` → 10,000th phone call (auto-expands to 5 digits)  
@@ -19,16 +19,16 @@
 
 ---
 
-### FileMaker Implementation
+### 6.1.2 FileMaker Implementation
 
-#### Simple
+#### 6.1.2.1 Simple
 ```filemaker
 DNA_Generator = "PHO" & Right ( Year ; 2 ) & SerialIncrement ( PHO_Counter ; 4 )
 
 // SerialIncrement automatically manages digit overflow
 ```
 
-#### Extended
+#### 6.1.2.2 Extended
 ```filemaker
 # Generate unique DNA code for PHO
 Set Variable [$year; Value: Right(Year(Get(CurrentDate)); 2)]
@@ -66,17 +66,17 @@ Together, they ensure that *every operation in the system is observable, traceab
 
 ## 6.3 CMP-ETY-LOG Architecture Clarification
 
-### CMP (Components)
+### 6.3.1 CMP (Components)
 
 The **CMP** table is the foundation of the system. It contains *everything that can exist* — both **process templates** and **real instances** that hold business data.
 
-#### Contents of CMP
+#### 6.3.1.1 Contents of CMP
 - Process templates (e.g., `PROC_PHO`, `PROC_RCH`)
 - Real instances with business data and attributes (e.g., `PHO250001` with customer name, duration, etc.)
 - Attributes
 - Meta-attributes
 
-#### CMP Table Definition and Example
+#### 6.3.1.2 CMP Table Definition and Example
 The `CMP` table stores both templates and instances in a unified, flexible structure.
 
 ```sql
@@ -103,17 +103,17 @@ Example of Instance_JSON in CMP (Phone Call: PHO250001)
 }
 ```
 
-### ETY (Entities)
+### 6.3.2 ETY (Entities)
 
 The **ETY** table represents everything that exists *right now* — the live orchestration layer of the system. It is responsible for managing **workflow states**, **transitions**, and **responsible parties**, but it does **not** hold business data.
 
-#### Contents of ETY
+#### 6.3.2.1 Contents of ETY
 - Everything that exists now  
 - Workflow orchestration **only**  
 - States, transitions, and responsible parties  
 - No business data (business data lives in CMP)
 
-#### ETY Table Definition and Example
+#### 6.3.2.2 ETY Table Definition and Example
 The `ETY` table manages the dynamic behavior of active processes.
 
 ```sql
@@ -138,17 +138,17 @@ Example of data in ETY for same Phone Call (PHO250001_ORCH)
 }
 ```
 
-### LOG (Logs)
+### 6.3.3 LOG (Logs)
 
 The **LOG** table is the immutable history of everything that has happened in the system.  
 It serves as a **complete audit trail** — recording every action, change, and event that occurs during a process lifecycle.
 
-#### Contents of LOG
+#### 6.3.3.1 Contents of LOG
 - Everything that has happened  
 - Immutable history of every action  
 - Complete audit trail of the system  
 
-#### LOG Table Definition and Example
+#### 6.3.3.2 LOG Table Definition and Example
 The `LOG` table captures and preserves all events and transitions across processes and entities.
 
 ```sql
