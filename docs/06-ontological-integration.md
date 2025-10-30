@@ -27,3 +27,22 @@ DNA_Generator = "PHO" & Right ( Year ; 2 ) & SerialIncrement ( PHO_Counter ; 4 )
 
 // SerialIncrement automatically manages digit overflow
 ```
+
+#### Extended
+```filemaker
+# Generate unique DNA code for PHO
+Set Variable [$year; Value: Right(Year(Get(CurrentDate)); 2)]
+Set Variable [$type; Value: "PHO"]
+
+# Get next sequence with collision prevention
+Perform Script ["Get_Next_Sequence"; Parameter: "PHO"]
+Set Variable [$sequence; Value: Get(ScriptResult)]
+
+# Format with automatic overflow handling
+If [$sequence < 10000]
+    Set Variable [$dna; Value: $type & $year & Right("0000" & $sequence; 4)]
+Else If [$sequence < 100000]
+    Set Variable [$dna; Value: $type & $year & $sequence]
+End If
+
+Exit Script [Result: $dna]
