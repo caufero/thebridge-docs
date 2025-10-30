@@ -216,3 +216,4 @@ The logging system operates on a **three-level hierarchy**, allowing The Bridge 
     "timestamp_precise": "2025-09-17T09:16:23.456Z"
   }
 }
+```
