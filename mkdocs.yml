@@ -1,8 +1,49 @@
 site_name: The Bridge Documentation
 theme:
   name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
 nav:
   - Home: index.md
-  - Ontology:
-      - Overview: ontology/overview.md
-      - Entity Model: ontology/entity-model.md
+  - 1. Introduction: 01-introduction.md
+  - 2. Vision & Philosophy: 02-vision-philosophy.md
+  - 3. System Objectives: 03-system-objectives.md
+  - 4. Functional Requirements: 04-functional-requirements.md
+  - 5. Stack: 05-stack.md
+  - 6. Ontological Integration: 06-ontological-integration.md
+  - 7. User Interface Design: 07-user-interface-design.md
+  - 8. Attributes of Attributes – The 10 Ontological Domains: 08-attributes-of-attributes.md
+  - 9. Workflow Specification: 09-workflow-specification.md
+  - 10. Operational Flow: 10-operational-flow.md
+  - 11. Operational Chain and Triggers: 11-operational-chain-triggers.md
+  - 12. Communication and Responsibility: 12-communication-responsibility.md
+  - 13. External Integrations: 13-external-integrations.md
+  - 14. Security Model: 14-security-model.md
+  - 15. Rules Engine (For Processes): 15-rules-engine.md
+  - 16. Integration Strategy: 16-integration-strategy.md
+  - 17. Reporting & Analytics: 17-reporting-analytics.md
+  - 18. Non-Functional Requirements: 18-nonfunctional-requirements.md
+  - 19. Development Plan: 19-development-plan.md
+  - 20. Testing Strategy: 20-testing-strategy.md
+  - 21. Deployment Plan: 21-deployment-plan.md
+  - 22. Documentation: 22-documentation.md
+  - 23. Maintenance & Support: 23-maintenance-support.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tasklist
+  - pymdownx.tabbed
