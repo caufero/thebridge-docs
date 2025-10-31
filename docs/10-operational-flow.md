@@ -284,3 +284,132 @@ This template defines the structure, attributes, validation rules, workflow, and
   "instance_json": null
 }
 ```
+
+#### 10.3.5 Creation of Instance (T = 0 seconds)
+
+##### 10.3.5.1 Description
+This section describes the real-time system actions that occur immediately when **Sara** initiates a new phone call process instance.  
+At timestamp **10:00:00**, the system generates a new DNA code, creates the `CMP` record, initializes orchestration in `ETY`, and logs the creation in `LOG`.
+
+---
+
+##### 10.3.5.2 Generate DNA with Anti-Collision
+
+###### 10.3.5.2.1 Description
+When Sara clicks **[+ New Phone Call]**, the system must generate a unique DNA code for the instance.  
+A locking mechanism ensures collision-free generation when multiple users create instances simultaneously.
+
+###### 10.3.5.2.2 Code Implementation
+
+```js
+// DNA Generation with lock
+function generateDNA() {
+  const lock = acquireLock('PHO_DNA_GENERATION');
+  if (!lock) {
+    wait(100ms);
+    return generateDNA(); // Retry
+  }
+
+  const year = '25';
+  const lastDNA = query("SELECT MAX(dna_code) FROM CMP WHERE dna_code LIKE 'PHO25%'");
+  const nextNum = extractNumber(lastDNA) + 1;
+  const newDNA = 'PHO25' + String(nextNum).padStart(4, '0');
+
+  releaseLock('PHO_DNA_GENERATION');
+  return newDNA; // Returns: PHO250042
+}
+```
+
+---
+
+##### 10.3.5.3 Create CMP Instance Record
+
+###### 10.3.5.3.1 Description
+Once the DNA code has been generated, the system creates a new record in the **CMP (Component)** table.  
+This entry is a live instance derived from the parent template `PHO_TEMPLATE_V1` and acts as the foundation for all subsequent operations across ETY (Entity) and LOG modules.
+
+###### 10.3.5.3.2 JSON Definition
+
+```json
+{
+  "dna_code": "PHO250042",
+  "is_template": false,
+  "parent_template": "PHO_TEMPLATE_V1",
+  "created_at": "2025-01-15T10:00:00Z",
+  "created_by": "sara.bianchi",
+  "template_json": null,
+  "instance_json": {
+    "values": {
+      "caller_name": null,
+      "phone_number": null,
+      "duration_minutes": null,
+      "outcome": null,
+      "notes": null
+    },
+    "metadata": {
+      "ip_address": "192.168.1.45",
+      "device": "Desktop_Chrome_v120",
+      "location": "Office_Milano"
+    }
+  }
+}
+```
+
+---
+
+##### 10.3.5.4 Initialize ETY Orchestration
+
+###### 10.3.5.4.1 Description
+After the CMP instance record is created, the system initializes a corresponding **ETY (Entity)** orchestration entry.  
+This defines the operational control layer for workflow management, responsibilities, and automation tracking tied to the instance.
+
+###### 10.3.5.4.2 JSON Definition
+
+```json
+{
+  "entity_id": "PHO250042",
+  "process_type": "PHO",
+  "workflow_state": "NEW",
+  "responsible": "sara.bianchi",
+  "controller": "sales_manager",
+  "started_at": "2025-01-15T10:00:00Z",
+  "completed_at": null,
+  "workflow_json": {
+    "current_state": "NEW",
+    "available_actions": ["start_call", "cancel"],
+    "state_timeout": null,
+    "automation_enabled": true
+  }
+}
+```
+
+---
+
+##### 10.3.5.5 First LOG Entry
+
+###### 10.3.5.5.1 Description
+Immediately after the creation of the CMP and ETY records, the system generates a **LOG entry** to document the event.  
+This ensures complete traceability of all actions performed in the system.  
+Each log entry is uniquely identified and includes contextual metadata for audit, debugging, and analytics.
+
+###### 10.3.5.5.2 JSON Definition
+
+```json
+{
+  "log_id": "550e8400-e29b-41d4-a716-446655440001",
+  "entity_id": "PHO250042",
+  "log_level": "L1_PROCESS",
+  "action": "INSTANCE_CREATED",
+  "actor": "sara.bianchi",
+  "timestamp": "2025-01-15T10:00:00.123Z",
+  "changes": {
+    "type": "creation",
+    "template": "PHO_TEMPLATE_V1",
+    "initial_state": "NEW"
+  },
+  "metadata": {
+    "session_id": "sess_abc123",
+    "request_id": "req_xyz789"
+  }
+}
+```
