@@ -698,13 +698,13 @@ This action completes the call instance, finalizes all field values in **CMP**, 
 
 ---
 
-#### 10.3.6 Trigger Execution (T = 12 minutes + 1 second)
+#### 10.3.9 Trigger Execution (T = 12 minutes + 1 second)
 
 Immediately after Sara ends the call and selects the outcome `"INTERESTED"`, the system detects the trigger condition and automatically executes the associated actions defined in the template configuration. In this case, the configured trigger creates a follow-up task and notifies the sales manager.
 
 ---
 
-##### 10.3.6.1 Create OFC Task
+##### 10.3.9.1 Create OFC Task
 
 ```json
 {
@@ -725,7 +725,7 @@ Immediately after Sara ends the call and selects the outcome `"INTERESTED"`, the
 
 ---
 
-##### 10.3.6.2 Manager Notification
+##### 10.3.9.2 Manager Notification
 
 ```json
 {
@@ -747,7 +747,7 @@ Immediately after Sara ends the call and selects the outcome `"INTERESTED"`, the
 
 ---
 
-##### 10.3.6.3 Notes
+##### 10.3.9.3 Notes
 
 - **Trigger Detection:** The system continuously monitors field changes; once `outcome === "INTERESTED"`, it executes the linked trigger.
 - **TSK Creation:** An offer creation task (`TSK250089`) is generated and assigned to Sara with high priority and a next-day due date.
@@ -756,10 +756,194 @@ Immediately after Sara ends the call and selects the outcome `"INTERESTED"`, the
 
 ---
 
-##### 10.3.6.4 Timeline Update
+##### 10.3.9.4 Timeline Update
 
 | Time | Event | Layer | Description |
 |------|-------|-------|-------------|
 | 10:12:01.000 | Trigger detected | APP | `outcome = INTERESTED` |
 | 10:12:01.050 | Task created | CMP | `TSK250089` created for offer action |
 | 10:12:01.100 | Notification sent | LOG / EMAIL | Sales manager notified |
+
+---
+
+#### 10.3.10 K Coefficient Calculation (T = 12 minutes + 2 seconds)
+
+Immediately after workflow completion and trigger execution, the system calculates the **K coefficient**, an efficiency metric used to evaluate the operator’s performance during the call. The calculation is done using both process data (duration) and employee performance indicators.
+
+---
+
+##### 10.3.10.1 Calculation Details
+
+```js
+// K Coefficient Formula Implementation
+function calculateK(processData) {
+  // Extract metrics
+  const standardTime = 10;   // minutes (from template)
+  const actualTime = 12;     // minutes (from instance)
+
+  // Component calculations
+  const extracicli = actualTime / standardTime; // 1.2
+  const rendimento = 0.85;   // From employee metrics
+  const presenteismo = 0.95; // From attendance data
+
+  // K Formula
+  const k = extracicli / (rendimento * presenteismo);
+  // k = 1.2 / (0.85 * 0.95) = 1.2 / 0.8075 = 1.486
+
+  return {
+    value: 1.49,  // Rounded
+    status: 'GOOD', // < 1.5 threshold
+    components: {
+      extracicli: 1.2,
+      rendimento: 0.85,
+      presenteismo: 0.95
+    }
+  };
+}
+```
+
+---
+
+##### 10.3.10.2 Update CMP with K Result
+
+```json
+{
+  "instance_json": {
+    "k_coefficient": {
+      "value": 1.49,
+      "status": "GOOD",
+      "calculated_at": "2025-01-15T10:12:02Z",
+      "formula": "K = Extracicli/(Rendimento×Presenteismo)",
+      "components": {
+        "extracicli": 1.2,
+        "rendimento": 0.85,
+        "presenteismo": 0.95
+      },
+      "threshold": {
+        "good": "< 1.5",
+        "warning": "1.5-2.0",
+        "critical": "> 2.0"
+      }
+    }
+  }
+}
+```
+
+---
+
+##### 10.3.10.3 Notes
+
+- **K Coefficient Purpose:** Evaluates call efficiency relative to predefined standards and operator performance.  
+- **Value Interpretation:** A result of **1.49** falls within the **GOOD** threshold (`< 1.5`), indicating acceptable performance.  
+- **Real-Time Analysis:** The calculation is executed as part of the post-call workflow, allowing immediate reporting and action.  
+- **CMP Mapping:** The result is stored directly in the CMP instance for dashboards, performance reviews, and automated alerts.
+
+---
+
+##### 10.3.10.4 Timeline Update
+
+| Time | Event | Layer | Description |
+|------|-------|-------|-------------|
+| 10:12:02.000 | K calculation executed | APP | Data from CMP + HR metrics |
+| 10:12:02.050 | K stored in CMP | CMP | Result saved in instance JSON |
+
+---
+
+#### 10.3.11 Complete Database State
+
+At the end of the full PHO process lifecycle, the system's three core layers — **CMP**, **ETY**, and **LOG** — together reflect the final, persistent state of the call instance. This section provides a snapshot of the database records as they exist after all processes, triggers, and calculations are fully completed.
+
+---
+
+##### 10.3.11.1 Final CMP Record (PHO250042)
+
+```json
+{
+  "dna_code": "PHO250042",
+  "is_template": false,
+  "parent_template": "PHO_TEMPLATE_V1",
+  "created_at": "2025-01-15T10:00:00Z",
+  "created_by": "sara.bianchi",
+  "modified_at": "2025-01-15T10:12:02Z",
+  "modified_by": "system",
+  "template_json": null,
+  "instance_json": {
+    "values": {
+      "caller_name": "Mario Rossi - Boutique Milano",
+      "phone_number": "+39 02 8901234",
+      "duration_minutes": 12,
+      "outcome": "INTERESTED",
+      "notes": "Cliente esistente, interessato nuova collezione primavera. Richiede catalogo completo e campioni bio"
+    },
+    "metadata": {
+      "ip_address": "192.168.1.45",
+      "device": "Desktop_Chrome_v120",
+      "location": "Office_Milano",
+      "call_quality": "excellent",
+      "recording_available": false,
+      "follow_up_required": true
+    },
+    "k_coefficient": {
+      "value": 1.49,
+      "status": "GOOD",
+      "calculated_at": "2025-01-15T10:12:02Z"
+    }
+  }
+}
+```
+
+---
+
+##### 10.3.11.2 Final ETY Record (PHO250042)
+
+```json
+{
+  "entity_id": "PHO250042",
+  "process_type": "PHO",
+  "workflow_state": "COMPLETED",
+  "responsible": "sara.bianchi",
+  "controller": "sales_manager",
+  "started_at": "2025-01-15T10:00:00Z",
+  "completed_at": "2025-01-15T10:12:00Z",
+  "workflow_json": {
+    "current_state": "COMPLETED",
+    "state_history": [
+      {"state": "NEW", "timestamp": "2025-01-15T10:00:00Z"},
+      {"state": "IN_PROGRESS", "timestamp": "2025-01-15T10:01:00Z"},
+      {"state": "COMPLETED", "timestamp": "2025-01-15T10:12:00Z"}
+    ],
+    "actual_duration": 720,
+    "triggers_executed": ["create_offer_on_interest"]
+  }
+}
+```
+
+---
+
+##### 10.3.11.3 LOG Summary (13 entries total)
+
+```json
+{
+  "summary": {
+    "entity_id": "PHO250042",
+    "total_entries": 13,
+    "by_level": {
+      "L1_PROCESS": 2,
+      "L2_ACTIVITY": 3,
+      "L3_ATOMIC": 8
+    },
+    "duration": "12 minutes",
+    "first_entry": "2025-01-15T10:00:00.123Z",
+    "last_entry": "2025-01-15T10:12:02.456Z"
+  }
+}
+```
+
+---
+
+##### 10.3.11.4 Notes
+
+- **CMP Layer** reflects the final structure of the call object, including the caller’s info, outcome, and efficiency score.
+- **ETY Layer** confirms that the workflow moved sequentially from `NEW` → `IN_PROGRESS` → `COMPLETED`, with the process fully wrapped up at `10:12:00Z`.
+- **LOG Layer** captured a total of **13 entries**, allowing full reconstruction of the call timeline for reporting, auditing, or dispute resolution.
+- Together, these layers represent the core pillars of the 3P3 architecture: **Components**, **Entities**, and **Logs** — delivering traceable, scalable, and auto-orchestrated business workflows.
