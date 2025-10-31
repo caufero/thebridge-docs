@@ -1,4 +1,4 @@
-# Welcome to The Bridge - Technical Specifications Documentation
+# Welcome to The Bridge - Technical Documentation
 
 This is the official technical documentation for **The Bridge**.
 
