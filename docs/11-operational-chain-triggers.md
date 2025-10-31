@@ -6,18 +6,18 @@ This section outlines how entities in the system activate one another through **
 
 ### 11.1 Operational Flow Example
 
-```text
-VIS (Customer Visit)
- ↳ PRJ (New Catalog Project)
-  ↳ RCH (Sampling Request)
-   ↳ TEH (Sample Preparation)
-   ↳ TEH (Photography)
-  ↳ RCH (Graphics Request)
-   ↳ TEH (Catalog Design)
-  ↳ OFC (Economic Offer)
-   ↳ ORD (Confirmed Order)
-    ↳ BOM (Bill of Materials)
-     ↳ PRD (Production)
+```mermaid
+graph TD;
+  VIS["VIS<br>(Customer Visit)"] --> PRJ["PRJ<br>(New Catalog Project)"];
+  PRJ --> RCH1["RCH<br>(Sampling Request)"];
+  RCH1 --> TEH1["TEH<br>(Sample Preparation)"];
+  RCH1 --> TEH2["TEH<br>(Photography)"];
+  PRJ --> RCH2["RCH<br>(Graphics Request)"];
+  RCH2 --> TEH3["TEH<br>(Catalog Design)"];
+  PRJ --> OFC["OFC<br>(Economic Offer)"];
+  OFC --> ORD["ORD<br>(Confirmed Order)"];
+  ORD --> BOM["BOM<br>(Bill of Materials)"];
+  BOM --> PRD["PRD<br>(Production)"];
 ```
 
 #### 11.1.1 Flow Breakdown
