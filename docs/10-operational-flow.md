@@ -695,3 +695,71 @@ This action completes the call instance, finalizes all field values in **CMP**, 
 | 10:12:00.020 | CMP updated | CMP | Final instance values saved |
 | 10:12:00.035 | Workflow completed | ETY | State → `COMPLETED`, timer stopped |
 | 10:12:00.055 | Multiple logs recorded | LOG | Field updates + process summary |
+
+---
+
+#### 10.3.6 Trigger Execution (T = 12 minutes + 1 second)
+
+Immediately after Sara ends the call and selects the outcome `"INTERESTED"`, the system detects the trigger condition and automatically executes the associated actions defined in the template configuration. In this case, the configured trigger creates a follow-up task and notifies the sales manager.
+
+---
+
+##### 10.3.6.1 Create OFC Task
+
+```json
+{
+  "dna_code": "TSK250089",
+  "is_template": false,
+  "parent_dna": "PHO250042",
+  "instance_json": {
+    "values": {
+      "task_type": "CREATE_OFFER",
+      "assigned_to": "sara.bianchi",
+      "due_date": "2025-01-16T10:00:00Z",
+      "priority": "HIGH",
+      "description": "Create offer for Mario Rossi - Boutique Milano following PHO250042"
+    }
+  }
+}
+```
+
+---
+
+##### 10.3.6.2 Manager Notification
+
+```json
+{
+  "log_level": "L2_ACTIVITY",
+  "action": "TRIGGER_EXECUTED",
+  "trigger_name": "create_offer_on_interest",
+  "results": [
+    {
+      "action": "task_created",
+      "target": "TSK250089"
+    },
+    {
+      "action": "email_sent",
+      "recipient": "sales.manager@kooltool.com"
+    }
+  ]
+}
+```
+
+---
+
+##### 10.3.6.3 Notes
+
+- **Trigger Detection:** The system continuously monitors field changes; once `outcome === "INTERESTED"`, it executes the linked trigger.
+- **TSK Creation:** An offer creation task (`TSK250089`) is generated and assigned to Sara with high priority and a next-day due date.
+- **Manager Alert:** An automatic email is sent to the sales manager, notifying them of the lead's positive response and upcoming task.
+- **Chained Workflow:** This action chain demonstrates how PHO (Phone Call) processes can spawn OFC (Offer Creation) processes or tasks seamlessly.
+
+---
+
+##### 10.3.6.4 Timeline Update
+
+| Time | Event | Layer | Description |
+|------|-------|-------|-------------|
+| 10:12:01.000 | Trigger detected | APP | `outcome = INTERESTED` |
+| 10:12:01.050 | Task created | CMP | `TSK250089` created for offer action |
+| 10:12:01.100 | Notification sent | LOG / EMAIL | Sales manager notified |
