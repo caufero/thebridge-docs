@@ -592,3 +592,106 @@ Each field update triggers data validation, updates the CMP instance record, and
   }
 }
 ```
+
+---
+
+#### 10.3.8 End Call (T = 12 minutes)
+
+At **10:12:00**, Sara ends the call and selects the outcome `"INTERESTED"`.  
+This action completes the call instance, finalizes all field values in **CMP**, transitions the workflow to `COMPLETED` in **ETY**, and generates multiple log entries in **LOG** to reflect the final state, notable changes, and key performance data.
+
+---
+
+##### 10.3.8.1 CMP – Complete Instance Data
+
+```json
+{
+  "dna_code": "PHO250042",
+  "instance_json": {
+    "values": {
+      "caller_name": "Mario Rossi - Boutique Milano",
+      "phone_number": "+39 02 8901234",
+      "duration_minutes": 12,
+      "outcome": "INTERESTED",
+      "notes": "Existing client, wants spring catalog + organic samples."
+    },
+    "metadata": {
+      "call_quality": "excellent",
+      "recording_available": false,
+      "follow_up_required": true
+    }
+  }
+}
+```
+
+---
+
+##### 10.3.8.2 ETY – Workflow Completion
+
+```json
+{
+  "entity_id": "PHO250042",
+  "workflow_state": "COMPLETED",
+  "completed_at": "2025-01-15T10:12:00Z",
+  "workflow_json": {
+    "current_state": "COMPLETED",
+    "available_actions": ["archive", "reopen"],
+    "timer_stopped": "2025-01-15T10:12:00Z",
+    "actual_duration": 720,
+    "completion_type": "normal"
+  }
+}
+```
+
+---
+
+##### 10.3.8.3 LOG – Multiple Entries
+
+```json
+[
+  {
+    "log_level": "L3_ATOMIC",
+    "action": "FIELD_UPDATE",
+    "field": "outcome",
+    "new_value": "INTERESTED"
+  },
+  {
+    "log_level": "L3_ATOMIC",
+    "action": "FIELD_UPDATE",
+    "field": "duration_minutes",
+    "new_value": 12
+  },
+  {
+    "log_level": "L1_PROCESS",
+    "action": "PROCESS_COMPLETED",
+    "summary": {
+      "total_duration": 720,
+      "fields_completed": 5,
+      "outcome": "INTERESTED"
+    }
+  }
+]
+```
+
+---
+
+##### 10.3.8.4 Notes
+
+- **CMP Finalization:** All user-entered fields are now fully populated and saved.  
+- **Workflow State:** Workflow advances from `IN_PROGRESS` to `COMPLETED`, with post-completion actions (`archive`, `reopen`) available based on business rules.  
+- **LOG Activity:**  
+  - `L3_ATOMIC` logs record specific field updates (e.g. `outcome`, `duration_minutes`).  
+  - `L1_PROCESS` log captures the final completion event summarizing the entire call.  
+- **Duration:** Total call duration was `720 seconds = 12 minutes`, calculated and recorded automatically by the system.  
+- **Next Steps:** Since the outcome is `"INTERESTED"`, follow-up triggers (e.g., offer creation, notification) will execute in the next phase.
+
+---
+
+##### 10.3.8.5 Timeline Update
+
+| Time | Event | Layer | Description |
+|------|-------|-------|-------------|
+| 10:12:00.000 | User clicks `[End Call]` | UI | Form submitted |
+| 10:12:00.020 | CMP updated | CMP | Final instance values saved |
+| 10:12:00.035 | Workflow completed | ETY | State → `COMPLETED`, timer stopped |
+| 10:12:00.055 | Multiple logs recorded | LOG | Field updates + process summary |
