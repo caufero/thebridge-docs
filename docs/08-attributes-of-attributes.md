@@ -371,6 +371,7 @@ Each meta-attribute operates as a **domain of intelligence** defining not only t
   "unique_in_context": false,
   "dna_component": "PHO.COMM.001"
 }
+```
 
 ### 8.6 FileMaker Script – Process the 10 Domains
 
