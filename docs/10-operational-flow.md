@@ -465,3 +465,130 @@ This operation updates the **ETY** record, starts the timer for call tracking, a
   }
 }
 ```
+
+---
+
+##### 10.3.6.5 LOG – State Change Entry
+
+###### 10.3.6.5.1 Description
+After the workflow state is updated in **ETY**, the system creates a corresponding **LOG** entry.  
+This records the transition from `NEW` to `IN_PROGRESS`, providing full traceability and supporting performance analytics, incident tracking, and auditing.
+
+###### 10.3.6.5.2 JSON Definition
+
+```json
+{
+  "log_id": "550e8400-e29b-41d4-a716-446655440002",
+  "entity_id": "PHO250042",
+  "log_level": "L2_ACTIVITY",
+  "action": "STATE_TRANSITION",
+  "actor": "sara.bianchi",
+  "timestamp": "2025-01-15T10:01:00.456Z",
+  "changes": {
+    "from_state": "NEW",
+    "to_state": "IN_PROGRESS",
+    "trigger": "manual_start_button"
+  }
+}
+```
+
+---
+
+#### 10.3.7 During Call ( T = 1 - 12 minutes )
+
+##### 10.3.7.1 Description
+As the call progresses between Sara and Mario Rossi, the operator fills in call details in real time.  
+Each field update triggers data validation, updates the CMP instance record, and generates a corresponding LOG entry for traceability.
+
+---
+
+##### 10.3.7.2 T = 2 minutes – Caller Name Entered
+
+###### 10.3.7.2.1 Event Overview
+
+| Time | 10:02:00Z |
+|------|------------|
+| Action | Sara enters the caller’s name into the form. |
+| Field Updated | `caller_name` |
+| Value Entered | `"Mario Rossi - Boutique Milano"` |
+
+###### 10.3.7.2.2 CMP Update
+
+```json
+{
+  "instance_json": {
+    "values": {
+      "caller_name": "Mario Rossi - Boutique Milano",  // NEW VALUE
+      "phone_number": null,
+      "duration_minutes": null,
+      "outcome": null,
+      "notes": null
+    }
+  }
+}
+```
+
+###### 10.3.7.2.3 LOG Entry
+
+```json
+{
+  "instance_json": {
+    "values": {
+      "caller_name": "Mario Rossi - Boutique Milano",  // NEW VALUE
+      "phone_number": null,
+      "duration_minutes": null,
+      "outcome": null,
+      "notes": null
+    }
+  }
+}
+```
+
+---
+
+##### 10.3.7.3 T = 3 minutes - Phone Number Entered
+
+###### 10.3.7.3.1 Event Overview
+
+| Time | 10:03:00Z |
+|------|------------|
+| Action | Sara enters the phone number into the form. |
+| Field Updated | `phone_number` |
+| New Value | `+39 02 8901234` |
+
+###### 10.3.7.3.2 LOG Entry
+
+```json
+{
+  "log_level": "L3_ATOMIC",
+  "action": "FIELD_UPDATE",
+  "changes": {
+    "field": "phone_number",
+    "old_value": null,
+    "new_value": "+39 02 8901234"
+  }
+}
+```
+
+---
+
+##### 10.3.7.4 T = 5 minutes – Notes Started (Auto-save)
+
+###### 10.3.7.4.1 Event Overview
+| Time | 10:05:00Z |
+|------|------------|
+| Action | Sara begins typing notes; system auto-saves in-progress text. |
+| Field | `notes` |
+| Auto-Save | ✅ Enabled |
+
+###### 10.3.7.4.2 LOG Entry
+```json
+{
+  "log_level": "L3_ATOMIC",
+  "action": "AUTO_SAVE",
+  "changes": {
+    "field": "notes",
+    "value": "Cliente esistente, interessato..."
+  }
+}
+```
