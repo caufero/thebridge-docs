@@ -358,3 +358,96 @@ These properties enable the **Super Table** concept — the system behaves like 
 ```
 
 Each meta-attribute operates as a **domain of intelligence** defining not only the behavior and structure of the `Caller_Name` field but also its governance, learning, and compliance lifecycle within the Phone Call ontology.
+
+
+### 8.5 Example of Meta-Attributes for `Caller_Name` Attribute of Phone Call Template
+
+```json
+"1_IDENTITY": {
+  "code": "PHO_ATTR_001",
+  "display_name": "Caller Name",
+  "description": "Person or company identification",
+  "searchable": true,
+  "unique_in_context": false,
+  "dna_component": "PHO.COMM.001"
+}
+
+### 8.6 FileMaker Script – Process the 10 Domains
+
+#### 8.6.1 Description
+This script iterates through all ten domains associated with a given attribute and delegates the processing of each domain to its corresponding sub-script.  
+It ensures that every domain type (Identity, Temporal, etc.) is handled in sequence according to its position in the JSON structure.
+
+---
+
+#### 8.6.2 Script Name
+`Process_10_Domains`
+
+---
+
+#### 8.6.3 Script Logic
+
+```plaintext
+# Process all 10 domains for an attribute
+Set Variable [$attribute_name; Value: Get(ScriptParameter)]
+Set Variable [$domains_json; Value: JSONGetElement(CMP::Template_JSON; 
+   "attributes." & $attribute_name & ".domains")]
+
+# Loop through each domain
+Set Variable [$i; Value: 1]
+Loop
+   Exit Loop If [$i > 10]
+
+   Set Variable [$domain; Value: JSONGetElement($domains_json; $i)]
+
+   # Process based on domain type
+   If [$i = 1]  # IDENTITY
+      Perform Script ["Process_Identity_Domain"; Parameter: $domain]
+   Else If [$i = 2]  # TEMPORAL
+      Perform Script ["Process_Temporal_Domain"; Parameter: $domain]
+   # ... continue for all 10 domains
+   End If
+
+   Set Variable [$i; Value: $i + 1]
+End Loop
+```
+
+### 8.7 FileMaker Function – Parse Attribute Domains as JSON
+
+#### 8.7.1 Description
+This custom FileMaker function parses all domains defined within an attribute’s JSON structure.  
+It iterates through each domain key inside the `"domains"` object and processes each one individually using the `Process_Single_Domain` function.  
+The function returns the combined output of all processed domains or an error message if no domains are found.
+
+---
+
+#### 8.7.2 Function Name
+`Parse_Attribute_Domains_As_JSON`
+
+---
+
+#### 8.7.3 Function Logic
+
+```plaintext
+Let ([
+   domains = JSONListKeys(json_text; "domains");
+   result = ""
+];
+Case(
+   not IsEmpty(domains);
+   While([
+      i = 1;
+      output = ""
+   ];
+   i ≤ ValueCount(domains);
+   [
+      domain = GetValue(domains; i);
+      config = JSONGetElement(json_text; "domains." & domain);
+      output = output & Process_Single_Domain(domain; config) & ¶;
+      i = i + 1
+   ];
+   output
+   );
+   "Error: No domains found"
+)
+)
