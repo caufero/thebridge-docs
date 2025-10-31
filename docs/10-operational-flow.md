@@ -412,4 +412,56 @@ Each log entry is uniquely identified and includes contextual metadata for audit
     "request_id": "req_xyz789"
   }
 }
+``` 
+
+---
+
+#### 10.3.6 Start of Call (T = 1 minute)
+
+##### 10.3.6.1 Description
+At **10:01:00**, Sara receives the incoming call and clicks the **[Start Call]** button.  
+This user action triggers a workflow transition from the initial `NEW` state to `IN_PROGRESS`, activating the call timer and enabling new operational actions within the **ETY** orchestration layer.
+
+---
+
+##### 10.3.6.2 Event Overview
+
+| Field | Value |
+|:------|:-------|
+| **User** | `sara.bianchi` |
+| **Action** | `[Start Call]` |
+| **Time** | `2025-01-15 10:01:00Z` |
+| **Previous State** | `NEW` |
+| **New State** | `IN_PROGRESS` |
+| **Triggered By** | Manual user interaction |
+
+---
+
+##### 10.3.6.3 System Behavior
+1. Updates the **ETY** record to reflect the new state (`IN_PROGRESS`).  
+2. Starts the activity timer (duration = 1 hour).  
+3. Publishes new actions — `end_call`, `pause`, and `cancel` — to the user interface.  
+4. Creates a corresponding **LOG** entry recording the transition event.  
+
+---
+
+##### 10.3.6.4 ETY – State Transition
+
+###### 10.3.6.4.1 Description
+Once Sara clicks **[Start Call]**, the system transitions the entity’s workflow state from `NEW` to `IN_PROGRESS`.  
+This operation updates the **ETY** record, starts the timer for call tracking, and refreshes available actions for the operator.
+
+###### 10.3.6.4.2 JSON Definition
+
+```json
+{
+  "entity_id": "PHO250042",
+  "workflow_state": "IN_PROGRESS",
+  "workflow_json": {
+    "current_state": "IN_PROGRESS",
+    "available_actions": ["end_call", "pause", "cancel"],
+    "timer_started": "2025-01-15T10:01:00Z",
+    "state_timeout": 3600
+  }
+}
 ```
