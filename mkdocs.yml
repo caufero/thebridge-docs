@@ -1,4 +1,4 @@
-site_name: The Bridge Documentation
+site_name: The Bridge - Full Technical Specifications Document
 
 theme:
   name: material
@@ -36,6 +36,7 @@ extra:
   social:
     - icon: material/web
       link: https://caufero.com
+  site_description: Official technical documentation for The Bridge software.
       
 nav:
   - Home: index.md
