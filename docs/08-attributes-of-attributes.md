@@ -1,7 +1,6 @@
-## 8. Attributes of Attributes – The 10 Ontological Domains
 Each attribute is not just a data field but a complete entity managing **10 existential domains**.
 
-### 8.1 The 10 Domains for Each Attribute
+## 8.1 The 10 Domains for Each Attribute
 | **Domain** | **Behavior** | **PHO Implementation** |
 |-------------|---------------|--------------------------|
 | **IDENTITY** | Who I am | Unique identifier in call context |
@@ -16,9 +15,9 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 | **EVOLUTION** | How I improve | ML optimization |
 
 
-### 8.2 Example of the Attributes of Attributes Under the 10 Domains
+## 8.2 Example of the Attributes of Attributes Under the 10 Domains
 
-#### 1. IDENTITY
+### 1. IDENTITY
 ```json
 {
   "code": "CUST_NAME",
@@ -28,7 +27,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-#### 2. TEMPORAL
+### 2. TEMPORAL
 ```json
 {
   "valid_from": "creation_date",
@@ -38,7 +37,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-#### 3. AUTHORIZATION
+### 3. AUTHORIZATION
 ```json
 {
   "view": ["all_users"],
@@ -48,7 +47,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-#### 4. COMMUNICATION
+### 4. COMMUNICATION
 ```json
 {
   "api_field": "customer_name",
@@ -58,7 +57,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-#### 5. TRIGGERS
+### 5. TRIGGERS
 ```json
 {
   "on_change": "validate_customer",
@@ -68,7 +67,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-#### 6. DOCUMENTARY
+### 6. DOCUMENTARY
 ```json
 {
   "label": "Customer Name",
@@ -78,7 +77,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-#### 7. MATERIAL
+### 7. MATERIAL
 ```json
 {
   "max_length": 100,
@@ -88,7 +87,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-#### 8. PERFORMANCE
+### 8. PERFORMANCE
 ```json
 {
   "input_time": "5_seconds",
@@ -98,7 +97,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-#### 9. SECURITY
+### 9. SECURITY
 ```json
 {
   "gdpr_relevant": true,
@@ -108,7 +107,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-#### 10. EVOLUTION
+### 10. EVOLUTION
 ```json
 {
   "ml_training": true,
@@ -121,7 +120,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 Each attribute is a living construct — it defines how data behaves, evolves, and interacts within the ontological model. Together, these ten domains create a **self-regulating and auditable framework** that governs the lifecycle, control, and intelligence of every attribute in the system.
 
 
-### 8.3 Universal Meta-Properties (SUPER TABLE)
+## 8.3 Universal Meta-Properties (SUPER TABLE)
 
 | Property     | Values        | Description |
 |---------------|---------------|--------------|
@@ -133,7 +132,7 @@ Each attribute is a living construct — it defines how data behaves, evolves, a
 These properties enable the **Super Table** concept — the system behaves like a **universal Excel sheet** where every element, process, and attribute becomes globally filterable, sortable, and exportable. This design ensures consistency across modules and provides an instant analytical layer over all data structures.
 
 
-### 8.4 Example of Meta-Attributes for `Caller_Name` Attribute of Phone Call Template
+## 8.4 Example of Meta-Attributes for `Caller_Name` Attribute of Phone Call Template
 
 ```json
 "1_IDENTITY": {
@@ -360,7 +359,7 @@ These properties enable the **Super Table** concept — the system behaves like 
 Each meta-attribute operates as a **domain of intelligence** defining not only the behavior and structure of the `Caller_Name` field but also its governance, learning, and compliance lifecycle within the Phone Call ontology.
 
 
-### 8.5 Example of Meta-Attributes for `Caller_Name` Attribute of Phone Call Template
+## 8.5 Example of Meta-Attributes for `Caller_Name` Attribute of Phone Call Template
 
 ```json
 "1_IDENTITY": {
@@ -373,20 +372,20 @@ Each meta-attribute operates as a **domain of intelligence** defining not only t
 }
 ```
 
-### 8.6 FileMaker Script – Process the 10 Domains
+## 8.6 FileMaker Script – Process the 10 Domains
 
-#### 8.6.1 Description
+### 8.6.1 Description
 This script iterates through all ten domains associated with a given attribute and delegates the processing of each domain to its corresponding sub-script.  
 It ensures that every domain type (Identity, Temporal, etc.) is handled in sequence according to its position in the JSON structure.
 
 ---
 
-#### 8.6.2 Script Name
+### 8.6.2 Script Name
 `Process_10_Domains`
 
 ---
 
-#### 8.6.3 Script Logic
+### 8.6.3 Script Logic
 
 ```plaintext
 # Process all 10 domains for an attribute
@@ -413,21 +412,21 @@ Loop
 End Loop
 ```
 
-### 8.7 FileMaker Function – Parse Attribute Domains as JSON
+## 8.7 FileMaker Function – Parse Attribute Domains as JSON
 
-#### 8.7.1 Description
+### 8.7.1 Description
 This custom FileMaker function parses all domains defined within an attribute’s JSON structure.  
 It iterates through each domain key inside the `"domains"` object and processes each one individually using the `Process_Single_Domain` function.  
 The function returns the combined output of all processed domains or an error message if no domains are found.
 
 ---
 
-#### 8.7.2 Function Name
+### 8.7.2 Function Name
 `Parse_Attribute_Domains_As_JSON`
 
 ---
 
-#### 8.7.3 Function Logic
+### 8.7.3 Function Logic
 
 ```plaintext
 Let ([
