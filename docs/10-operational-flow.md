@@ -7,10 +7,12 @@ The configuration steps ensure that each process has its attributes, relationshi
 ---
 
 ### 10.1.2 Flow Steps
+
 1. **Manager selects or creates a process** in the TreeView interface.  
 2. **Defines necessary attributes** required for the process.  
 3. **Configures relationships and triggers** to link processes and automate behavior.  
 4. **System automatically generates** the following components:
+   
    - **Template in `CMP`** (Component Definition)
    - **User Interface** for data interaction
    - **Workflow in `ETY`** (Entity Definitions)
@@ -19,6 +21,7 @@ The configuration steps ensure that each process has its attributes, relationshi
 ---
 
 ### 10.1.3 Notes
+
 - The TreeView serves as the visual entry point for managing processes hierarchically.  
 - Attributes define the data model, while relationships control how entities interact.  
 - Triggers enable automation (e.g., automatic updates, notifications, or workflow transitions).  
@@ -28,6 +31,7 @@ The configuration steps ensure that each process has its attributes, relationshi
 
 ### 10.1.4 Example
 When a new **“Client Onboarding”** process is created:
+
 1. The manager defines attributes such as *Client Name*, *Assigned Officer*, and *Start Date*.  
 2. A trigger is set to notify the assigned officer once onboarding begins.  
 3. The system generates the necessary template (`CMP`), workflow (`ETY`), and logging rules (`LOG`) automatically.  
@@ -174,6 +178,7 @@ It shows how a configured template, user actions, and triggers collaborate to pr
 ---
 
 ### 10.3.3 Process Summary
+
 - The **PHO** process (Phone Call Management) was preconfigured and published in the system.  
 - The user created a new call instance from the **PHO template** in `CMP`.  
 - Upon saving the call with an **INTERESTED** outcome, the system automatically triggered an **offer creation** workflow.  
