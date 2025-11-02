@@ -1,5 +1,7 @@
 ## 10.1 Process Manager Configuration Flow
 
+---
+
 ### 10.1.1 Description
 This flow outlines how a manager defines and configures a process using the **Process Manager** interface.  
 The configuration steps ensure that each process has its attributes, relationships, and workflow logic properly generated and tracked across the system.
@@ -16,11 +18,15 @@ The configuration steps ensure that each process has its attributes, relationshi
    - **Workflow in `ETY`** (Entity Definitions)
    - **Tracking in `LOG`** (Activity Logs)
 
+---
+
 ### 10.1.3 Notes
 - The TreeView serves as the visual entry point for managing processes hierarchically.  
 - Attributes define the data model, while relationships control how entities interact.  
 - Triggers enable automation (e.g., automatic updates, notifications, or workflow transitions).  
 - Generated elements maintain consistent linkage between CMP, ETY, and LOG tables for full traceability.  
+
+---
 
 ### 10.1.4 Example
 When a new **“Client Onboarding”** process is created:
@@ -28,6 +34,8 @@ When a new **“Client Onboarding”** process is created:
 2. A trigger is set to notify the assigned officer once onboarding begins.  
 3. The system generates the necessary template (`CMP`), workflow (`ETY`), and logging rules (`LOG`) automatically.  
 4. A user interface layout is also generated for process tracking and updates.  
+
+---
 
 ### 10.1.5 Process Manager Configuration Flow (in JSON)
 
@@ -92,10 +100,14 @@ It includes the sequence of actions, required permissions, configurations for at
 
 ## 10.2 User Interaction Flow
 
+---
+
 ### 10.2.1 Description
 This section defines the full interaction flow for a typical user within the system.  
 It captures user login, dashboard configuration, and step-by-step actions during call creation.  
 The flow is modeled as a JSON structure that illustrates how user inputs trigger system responses, validations, and integrations.
+
+---
 
 ### 10.2.2 JSON Definition
 
@@ -147,9 +159,13 @@ const userFlow = {
 
 ## 10.3 Business Scenario Flow
 
+---
+
 ### 10.3.1 Description
 This section presents a real-world business scenario demonstrating how a sales operator interacts with the system using the **Phone Call Management (PHO)** process.  
 It shows how a configured template, user actions, and triggers collaborate to produce measurable business outcomes (e.g., K Coefficient efficiency).
+
+---
 
 ### 10.3.2 Scenario Overview
 
@@ -161,13 +177,19 @@ It shows how a configured template, user actions, and triggers collaborate to pr
 | **Outcome** | `INTERESTED` *(Triggers offer creation)* |
 | **K Coefficient Result** | **1.49 ✅** *(Efficient)* |
 
+---
+
 ### 10.3.3 Process Summary
 - The **PHO** process (Phone Call Management) was preconfigured and published in the system.  
 - The user created a new call instance from the **PHO template** in `CMP`.  
 - Upon saving the call with an **INTERESTED** outcome, the system automatically triggered an **offer creation** workflow.  
 - The **K coefficient** (performance metric) was recalculated and updated in real-time.
 
+---
+
 ### 10.3.4 Initial Setup
+
+---
 
 #### 10.3.4.1 Description
 Before any process instance can be created, a corresponding template must exist in the `CMP` table with the flag `is_template = true`.  
@@ -266,6 +288,8 @@ This template defines the structure, attributes, validation rules, workflow, and
   "instance_json": null
 }
 ```
+
+---
 
 ### 10.3.5 Creation of Instance (T = 0 seconds)
 
@@ -388,6 +412,8 @@ Each log entry is uniquely identified and includes contextual metadata for audit
 }
 ``` 
 
+---
+
 ### 10.3.6 Start of Call (T = 1 minute)
 
 #### 10.3.6.1 Description
@@ -455,6 +481,8 @@ This records the transition from `NEW` to `IN_PROGRESS`, providing full traceabi
   }
 }
 ```
+
+---
 
 ### 10.3.7 During Call ( T = 1 - 12 minutes )
 
@@ -549,6 +577,8 @@ Each field update triggers data validation, updates the CMP instance record, and
 }
 ```
 
+---
+
 ### 10.3.8 End Call (T = 12 minutes)
 
 At **10:12:00**, Sara ends the call and selects the outcome `"INTERESTED"`.  
@@ -640,6 +670,8 @@ This action completes the call instance, finalizes all field values in **CMP**, 
 | 10:12:00.035 | Workflow completed | ETY | State → `COMPLETED`, timer stopped |
 | 10:12:00.055 | Multiple logs recorded | LOG | Field updates + process summary |
 
+---
+
 ### 10.3.9 Trigger Execution (T = 12 minutes + 1 second)
 
 Immediately after Sara ends the call and selects the outcome `"INTERESTED"`, the system detects the trigger condition and automatically executes the associated actions defined in the template configuration. In this case, the configured trigger creates a follow-up task and notifies the sales manager.
@@ -697,6 +729,8 @@ Immediately after Sara ends the call and selects the outcome `"INTERESTED"`, the
 | 10:12:01.000 | Trigger detected | APP | `outcome = INTERESTED` |
 | 10:12:01.050 | Task created | CMP | `TSK250089` created for offer action |
 | 10:12:01.100 | Notification sent | LOG / EMAIL | Sales manager notified |
+
+---
 
 ### 10.3.10 K Coefficient Calculation (T = 12 minutes + 2 seconds)
 
@@ -770,6 +804,8 @@ function calculateK(processData) {
 |------|-------|-------|-------------|
 | 10:12:02.000 | K calculation executed | APP | Data from CMP + HR metrics |
 | 10:12:02.050 | K stored in CMP | CMP | Result saved in instance JSON |
+
+---
 
 ### 10.3.11 Complete Database State
 
