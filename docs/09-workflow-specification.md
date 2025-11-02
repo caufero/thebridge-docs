@@ -1,3 +1,4 @@
+# 9. Workflow Specification
 ## 9.1 Description
 This section defines the workflow configuration for process-driven entities such as calls, tickets, or tasks.  
 It outlines the **states**, **transitions**, and **automations** that determine how an entity moves through its lifecycle.  
