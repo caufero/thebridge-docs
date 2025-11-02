@@ -4,10 +4,12 @@
 
 - Not every entity automatically generates folders — this is **configurable in Process Manager**
 - Admin can define:
+
   - Which **processes** create folders
   - Which **file types** are accepted
   - Whether folder structure follows **DNA genealogy**
   - Whether permissions inherit from **Responsible / Controller**
+ 
 - Example: PHO may generate a folder, but TSK or LOG may not
 
 #### 13.1.1 Implementation Example
