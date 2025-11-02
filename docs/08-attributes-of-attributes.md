@@ -14,6 +14,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 | **SECURITY** | How I protect | Encryption / GDPR |
 | **EVOLUTION** | How I improve | ML optimization |
 
+---
 
 ## 8.2 Example of the Attributes of Attributes Under the 10 Domains
 
@@ -119,6 +120,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 
 Each attribute is a living construct — it defines how data behaves, evolves, and interacts within the ontological model. Together, these ten domains create a **self-regulating and auditable framework** that governs the lifecycle, control, and intelligence of every attribute in the system.
 
+---
 
 ## 8.3 Universal Meta-Properties (SUPER TABLE)
 
@@ -131,6 +133,7 @@ Each attribute is a living construct — it defines how data behaves, evolves, a
 
 These properties enable the **Super Table** concept — the system behaves like a **universal Excel sheet** where every element, process, and attribute becomes globally filterable, sortable, and exportable. This design ensures consistency across modules and provides an instant analytical layer over all data structures.
 
+---
 
 ## 8.4 Example of Meta-Attributes for `Caller_Name` Attribute of Phone Call Template
 
@@ -358,6 +361,7 @@ These properties enable the **Super Table** concept — the system behaves like 
 
 Each meta-attribute operates as a **domain of intelligence** defining not only the behavior and structure of the `Caller_Name` field but also its governance, learning, and compliance lifecycle within the Phone Call ontology.
 
+---
 
 ## 8.5 Example of Meta-Attributes for `Caller_Name` Attribute of Phone Call Template
 
@@ -371,6 +375,8 @@ Each meta-attribute operates as a **domain of intelligence** defining not only t
   "dna_component": "PHO.COMM.001"
 }
 ```
+
+---
 
 ## 8.6 FileMaker Script – Process the 10 Domains
 
@@ -411,6 +417,8 @@ Loop
    Set Variable [$i; Value: $i + 1]
 End Loop
 ```
+
+---
 
 ## 8.7 FileMaker Function – Parse Attribute Domains as JSON
 
