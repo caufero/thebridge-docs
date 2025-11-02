@@ -1,3 +1,5 @@
+# 12. Communication and Responsibility
+
 ## 12.1 Triple Responsibility System
 
 ### 12.1.1 The Standard
