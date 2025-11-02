@@ -34,6 +34,6 @@
 
 ---
 
-### 19.2 Environment  
+## 19.2 Environment  
 - Build directly on **Luca’s server**  
 - No local or staging environments initially planned (live iterative deployment)
