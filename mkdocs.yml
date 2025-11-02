@@ -48,7 +48,7 @@ plugins:
       combined: true
       combined_output_path: pdf/TheBridge-Technical-Specifications.pdf
       media_type: print
-
+      
 nav:
   - Home: index.md
   - 1. Introduction: 01-introduction.md
