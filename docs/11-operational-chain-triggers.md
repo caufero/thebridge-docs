@@ -1,10 +1,8 @@
-## 11. Operational Chain and Triggers
-
 This section outlines how entities in the system activate one another through **operational chains** and **triggers**, forming a seamless workflow from initial customer interaction to final production.
 
 ---
 
-### 11.1 Operational Flow Example
+## 11.1 Operational Flow Example
 
 ```mermaid
 graph TD;
@@ -20,7 +18,9 @@ graph TD;
   BOM --> PRD["PRD<br>(Production)"];
 ```
 
-#### 11.1.1 Flow Breakdown
+---
+
+### 11.1.1 Flow Breakdown
 
 - **VIS**: Captures customer needs and interest level.
 - **PRJ**: Creates a structured project if interest is high.
@@ -32,11 +32,11 @@ This flow allows seamless downstream activation, with each process inheriting da
 
 ---
 
-### 11.2 Trigger System
+## 11.2 Trigger System
 
 The system uses a **three-level trigger architecture** to drive both automation and decision support during the workflow.
 
-#### 1. Automatic Trigger (Always Executed)
+### 1. Automatic Trigger (Always Executed)
 
 ```pseudo
 IF visit.outcome = "high_interest"
@@ -47,7 +47,7 @@ THEN create_project (inherit_client_data)
 - No user intervention required.
 - Example: A high-interest visit automatically creates a project with pre-filled client data.
 
-#### 2. Manual Trigger (Suggested to User)
+### 2. Manual Trigger (Suggested to User)
 
 ```pseudo
 IF project.status = "approved"
@@ -58,7 +58,7 @@ SUGGEST ["Create technical requests", "Prepare offer", "Schedule meeting"]
 - User selects which actions to execute.
 - Encourages best practices without forcing workflows.
 
-#### 3. Conditional Trigger (Business Rule-Based)
+### 3. Conditional Trigger (Business Rule-Based)
 
 ```pseudo
 IF order.value > 10000 AND client.category = "new"
@@ -71,7 +71,7 @@ THEN require_approval(level="director")
 
 ---
 
-### Key Benefits
+## 11.3 Key Benefits
 
 - **Traceable** entity lifecycle from visit to production.
 - **Scalable** behavior framework for all process types.
