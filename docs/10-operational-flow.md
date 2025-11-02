@@ -1,7 +1,5 @@
 ## 10.1 Process Manager Configuration Flow
 
----
-
 ### 10.1.1 Description
 This flow outlines how a manager defines and configures a process using the **Process Manager** interface.  
 The configuration steps ensure that each process has its attributes, relationships, and workflow logic properly generated and tracked across the system.
@@ -100,8 +98,6 @@ It includes the sequence of actions, required permissions, configurations for at
 
 ## 10.2 User Interaction Flow
 
----
-
 ### 10.2.1 Description
 This section defines the full interaction flow for a typical user within the system.  
 It captures user login, dashboard configuration, and step-by-step actions during call creation.  
@@ -158,8 +154,6 @@ const userFlow = {
 ---
 
 ## 10.3 Business Scenario Flow
-
----
 
 ### 10.3.1 Description
 This section presents a real-world business scenario demonstrating how a sales operator interacts with the system using the **Phone Call Management (PHO)** process.  
