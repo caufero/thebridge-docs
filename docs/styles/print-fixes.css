@@ -1,0 +1,40 @@
+/* docs/styles/print-fixes.css */
+@media print {
+  /* Let content flow; remove fixed heights/overflow that clip pages */
+  .md-main, .md-content, .md-content__inner, main, article, section {
+    height: auto !important;
+    overflow: visible !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Stop the theme from forcing a page break after each chapter container */
+  .md-content__inner {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+  /* Keep headings with the first paragraph/table/code that follows */
+  .md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  .md-typeset h1 + *, .md-typeset h2 + *, .md-typeset h3 + *, .md-typeset h4 + * {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+  }
+
+  /* Don’t split code blocks and tables across pages */
+  pre, code, table {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* If any component adds explicit page-breaks, neutralize them */
+  .page-break {
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    break-before: auto !important;
+    break-after: auto !important;
+  }
+}
