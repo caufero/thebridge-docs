@@ -14,7 +14,7 @@
     
 - Basic automatic triggers enabled
 
----
+------
 
 ### 19.1.2 Phase 2 – Important (Should Have) — 2 Months  
 - Complete **meta-attributes** support  
