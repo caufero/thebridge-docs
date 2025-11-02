@@ -23,7 +23,7 @@ jobs:
       - name: Install MkDocs + theme
         run: |
           python -m pip install --upgrade pip
-          pip install mkdocs mkdocs-material mkdocs-pdf-export-plugin
+          pip install mkdocs mkdocs-material mkdocs-with-pdf
 
       - name: Build MkDocs
         run: mkdocs build --clean
