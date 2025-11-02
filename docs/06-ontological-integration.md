@@ -50,6 +50,8 @@ End If
 Exit Script [Result: $dna]
 ```
 
+---
+
 ## 6.2 Correct Nomenclature for Architecture (CRITICAL)
 
 | **Layer**     | **Code** | **Description**               |
