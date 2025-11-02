@@ -1,6 +1,9 @@
 Each attribute is not just a data field but a complete entity managing **10 existential domains**.
 
+---
+
 ## 8.1 The 10 Domains for Each Attribute
+
 | **Domain** | **Behavior** | **PHO Implementation** |
 |-------------|---------------|--------------------------|
 | **IDENTITY** | Who I am | Unique identifier in call context |
@@ -18,7 +21,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 
 ## 8.2 Example of the Attributes of Attributes Under the 10 Domains
 
-### 1. IDENTITY
+#### 1. IDENTITY
 ```json
 {
   "code": "CUST_NAME",
@@ -28,7 +31,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-### 2. TEMPORAL
+#### 2. TEMPORAL
 ```json
 {
   "valid_from": "creation_date",
@@ -38,7 +41,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-### 3. AUTHORIZATION
+#### 3. AUTHORIZATION
 ```json
 {
   "view": ["all_users"],
@@ -48,7 +51,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-### 4. COMMUNICATION
+#### 4. COMMUNICATION
 ```json
 {
   "api_field": "customer_name",
@@ -58,7 +61,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-### 5. TRIGGERS
+#### 5. TRIGGERS
 ```json
 {
   "on_change": "validate_customer",
@@ -68,7 +71,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-### 6. DOCUMENTARY
+#### 6. DOCUMENTARY
 ```json
 {
   "label": "Customer Name",
@@ -78,7 +81,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-### 7. MATERIAL
+#### 7. MATERIAL
 ```json
 {
   "max_length": 100,
@@ -88,7 +91,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-### 8. PERFORMANCE
+#### 8. PERFORMANCE
 ```json
 {
   "input_time": "5_seconds",
@@ -98,7 +101,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-### 9. SECURITY
+#### 9. SECURITY
 ```json
 {
   "gdpr_relevant": true,
@@ -108,7 +111,7 @@ Each attribute is not just a data field but a complete entity managing **10 exis
 }
 ```
 
-### 10. EVOLUTION
+#### 10. EVOLUTION
 ```json
 {
   "ml_training": true,
