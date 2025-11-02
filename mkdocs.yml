@@ -40,7 +40,17 @@ extra:
 
 extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
-  - js/mermaid-init.js 
+  - js/mermaid-init.js  
+      
+plugins:
+  - search
+  - with-pdf:
+      output_path: pdf/TheBridge-Technical-Specifications.pdf
+      cover_title: "The Bridge – Technical Specifications"
+      cover_subtitle: "Working Technical Spec"
+      author: "Caufero"
+      toc_title: "Contents"
+      ordered_chapters: true
 
 nav:
   - Home: index.md
