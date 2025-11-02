@@ -36,7 +36,7 @@ This flow allows seamless downstream activation, with each process inheriting da
 
 The system uses a **three-level trigger architecture** to drive both automation and decision support during the workflow.
 
-### 1. Automatic Trigger (Always Executed)
+#### 1. Automatic Trigger (Always Executed)
 
 ```pseudo
 IF visit.outcome = "high_interest"
@@ -47,7 +47,7 @@ THEN create_project (inherit_client_data)
 - No user intervention required.
 - Example: A high-interest visit automatically creates a project with pre-filled client data.
 
-### 2. Manual Trigger (Suggested to User)
+#### 2. Manual Trigger (Suggested to User)
 
 ```pseudo
 IF project.status = "approved"
@@ -58,7 +58,7 @@ SUGGEST ["Create technical requests", "Prepare offer", "Schedule meeting"]
 - User selects which actions to execute.
 - Encourages best practices without forcing workflows.
 
-### 3. Conditional Trigger (Business Rule-Based)
+#### 3. Conditional Trigger (Business Rule-Based)
 
 ```pseudo
 IF order.value > 10000 AND client.category = "new"
