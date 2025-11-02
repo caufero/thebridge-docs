@@ -1,6 +1,6 @@
 This section outlines how entities in the system activate one another through **operational chains** and **triggers**, forming a seamless workflow from initial customer interaction to final production.
 
----
+___
 
 ## 11.1 Operational Flow Example
 
@@ -30,7 +30,7 @@ graph TD;
 
 This flow allows seamless downstream activation, with each process inheriting data attributes from its parent context for accuracy and traceability.
 
----
+___
 
 ## 11.2 Trigger System
 
@@ -69,7 +69,7 @@ THEN require_approval(level="director")
 - Can block progression until conditions are met.
 - Supports escalation logic based on financial or legal thresholds.
 
----
+___
 
 ## 11.3 Key Benefits
 
