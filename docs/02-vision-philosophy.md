@@ -8,9 +8,9 @@ We will not be shipping many separate modules. We ship one **engine** that can e
 ## 2.2 Materials → Action → Result
 Every operation binds three things:
 
-    - **Material:** the object we work on
-    - **Action:** the task we perform
-    - **Result:** the outcome we record
+- **Material:** the object we work on
+- **Action:** the task we perform
+- **Result:** the outcome we record
 
 We store this consistently so we can slice history from any angle.
 
