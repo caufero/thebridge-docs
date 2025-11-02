@@ -1,3 +1,5 @@
+# 16. Integration Strategy
+
 ## 16.1 Email Notifications  
 - Actions defined in **Rules Engine** can trigger automatic email notifications  
 - Target recipients may include:
