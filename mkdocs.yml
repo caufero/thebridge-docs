@@ -37,6 +37,10 @@ extra:
     - icon: material/web
       link: https://caufero.com
   site_description: Official technical documentation for The Bridge software.
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - js/mermaid-init.js  
       
 nav:
   - Home: index.md
