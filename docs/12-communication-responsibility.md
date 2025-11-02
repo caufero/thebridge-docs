@@ -1,7 +1,5 @@
 ## 12.1 Triple Responsibility System
 
----
-
 ### 12.1.1 The Standard
 | Role | Meaning |
 |------|---------|
@@ -38,8 +36,6 @@ graph TD;
 ---
 
 ## 12.3 Notification and Escalation System
-
----
 
 ### 12.3.1 Rules (Structured)
 | Type | Rule |
