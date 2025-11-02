@@ -1,5 +1,3 @@
----
-
 ## 10.1 Process Manager Configuration Flow
 
 ---
