@@ -183,8 +183,6 @@ It shows how a configured template, user actions, and triggers collaborate to pr
 
 ### 10.3.4 Initial Setup
 
----
-
 #### 10.3.4.1 Description
 Before any process instance can be created, a corresponding template must exist in the `CMP` table with the flag `is_template = true`.  
 This template defines the structure, attributes, validation rules, workflow, and triggers that govern all subsequent PHO instances.
