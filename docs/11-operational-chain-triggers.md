@@ -1,3 +1,5 @@
+# 11. Operational Chain and Triggers
+
 This section outlines how entities in the system activate one another through **operational chains** and **triggers**, forming a seamless workflow from initial customer interaction to final production.
 
 ___
