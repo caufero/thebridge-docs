@@ -1,3 +1,5 @@
+# 17. Reporting & Analytics
+
 ## 17.1 Operational Reports  
 - Built dynamically from core tables:
    
