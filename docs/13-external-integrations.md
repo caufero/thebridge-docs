@@ -1,3 +1,5 @@
+# 13. External Integrations
+
 ## 13.1 Google Drive Principles
 
 - Not every entity automatically generates folders — this is **configurable in Process Manager**
