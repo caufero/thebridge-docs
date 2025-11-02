@@ -47,10 +47,12 @@ plugins:
   - with-pdf:
       output_path: pdf/TheBridge-Technical-Specifications.pdf
       cover_title: "The Bridge – Technical Specifications"
-      cover_subtitle: "Working Technical Spec"
-      author: "Caufero"
+      cover_subtitle: "Working Technical Specifications"
+      author: "Caufero & Luca Meggiolaro"
       toc_title: "Contents"
       ordered_chapters: true
+      render_js: true
+      verbose: true
 
 nav:
   - Home: index.md
