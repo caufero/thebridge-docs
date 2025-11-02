@@ -1,6 +1,4 @@
-## 16. Integration Strategy
-
-### 16.1 Email Notifications  
+## 16.1 Email Notifications  
 - Actions defined in **Rules Engine** can trigger automatic email notifications  
 - Target recipients may include:
   
@@ -13,7 +11,7 @@ _Example:_
 
 ---
 
-### 16.2 Webhooks  
+## 16.2 Webhooks  
 - Template actions can trigger **HTTP requests** to external systems  
 - Enables real-time integration with:
   
