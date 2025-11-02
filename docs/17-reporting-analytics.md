@@ -1,6 +1,4 @@
-## 17. Reporting & Analytics
-
-### 17.1 Operational Reports  
+## 17.1 Operational Reports  
 - Built dynamically from core tables:
    
     - **Processes** (business events)  
@@ -15,7 +13,7 @@
 
 ---
 
-### 17.2 Saved Reports  
+## 17.2 Saved Reports  
 - Reports are **not stored statically**  
 - They are **generated on demand**, especially when:
    
@@ -28,7 +26,7 @@ _Example:_
 
 ---
 
-### 17.3 Export Options  
+## 17.3 Export Options  
 - Users can export results in multiple formats:
   
     - **CSV** (data interchange)  
