@@ -5,6 +5,7 @@
 
 ### 14.2 Audit
 - **Every action is stored in three tables:**
-  - Processes
-  - ETY
-  - Logs
+  
+      - Processes
+      - ETY
+      - Logs
