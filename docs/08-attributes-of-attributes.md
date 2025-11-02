@@ -1,3 +1,4 @@
+# 8. Attributes of Attributes – The 10 Ontological Domains
 Each attribute is not just a data field but a complete entity managing **10 existential domains**.
 
 ---
