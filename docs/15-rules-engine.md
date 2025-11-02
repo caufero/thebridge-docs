@@ -1,6 +1,4 @@
-## 15. Rules Engine (For Processes)
-
-### 15.1 Rule Types  
+## 15.1 Rule Types  
 Defined at the **template level** within each process:
 
 - **Visibility**  
@@ -26,7 +24,7 @@ Defined at the **template level** within each process:
 
 ---
 
-### 15.2 Execution Flow  
+## 15.2 Execution Flow  
 
 ```mermaid
 sequenceDiagram
@@ -44,7 +42,7 @@ sequenceDiagram
 
 ---
 
-### 15.3 Safety Model
+## 15.3 Safety Model
 - **Client-side validation** ensures UX flow and field-level feedback
 - **Server-side re-validation** guarantees integrity (even via API or script)
 - **Invalid commits are rejected** with logged rule failure messages
