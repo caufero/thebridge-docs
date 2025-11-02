@@ -366,35 +366,20 @@ Each meta-attribute operates as a **domain of intelligence** defining not only t
 
 ---
 
-## 8.5 Example of Meta-Attributes for `Caller_Name` Attribute of Phone Call Template
+## 8.5 FileMaker Script – Process the 10 Domains
 
-```json
-"1_IDENTITY": {
-  "code": "PHO_ATTR_001",
-  "display_name": "Caller Name",
-  "description": "Person or company identification",
-  "searchable": true,
-  "unique_in_context": false,
-  "dna_component": "PHO.COMM.001"
-}
-```
-
----
-
-## 8.6 FileMaker Script – Process the 10 Domains
-
-### 8.6.1 Description
+### 8.5.1 Description
 This script iterates through all ten domains associated with a given attribute and delegates the processing of each domain to its corresponding sub-script.  
 It ensures that every domain type (Identity, Temporal, etc.) is handled in sequence according to its position in the JSON structure.
 
 ---
 
-### 8.6.2 Script Name
+### 8.5.2 Script Name
 `Process_10_Domains`
 
 ---
 
-### 8.6.3 Script Logic
+### 8.5.3 Script Logic
 
 ```plaintext
 # Process all 10 domains for an attribute
@@ -423,21 +408,21 @@ End Loop
 
 ---
 
-## 8.7 FileMaker Function – Parse Attribute Domains as JSON
+## 8.6 FileMaker Function – Parse Attribute Domains as JSON
 
-### 8.7.1 Description
+### 8.6.1 Description
 This custom FileMaker function parses all domains defined within an attribute’s JSON structure.  
 It iterates through each domain key inside the `"domains"` object and processes each one individually using the `Process_Single_Domain` function.  
 The function returns the combined output of all processed domains or an error message if no domains are found.
 
 ---
 
-### 8.7.2 Function Name
+### 8.6.2 Function Name
 `Parse_Attribute_Domains_As_JSON`
 
 ---
 
-### 8.7.3 Function Logic
+### 8.6.3 Function Logic
 
 ```plaintext
 Let ([
