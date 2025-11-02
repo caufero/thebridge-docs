@@ -8,19 +8,21 @@ Defined at the **template level** within each process:
   _Example:_ `IF outcome = "NO_ANSWER" THEN hide duration_minutes`
 
 - **Validation**  
-  Field or cross-field constraints  
-  - `required`
-  - `unique`
-  - `regex`
-  - `min/max`
-  - `IF duration_minutes > 30 THEN require notes`
+  Field or cross-field constraints
+  
+    - `required`
+    - `unique`
+    - `regex`
+    - `min/max`
+    - `IF duration_minutes > 30 THEN require notes`
 
 - **Actions**  
-  Trigger automatic operations when conditions are met  
-  - Notifications  
-  - Write-through to linked records  
-  - Spawn child processes  
-  - Generate auto-codes (e.g. DNA, TSK IDs)
+  Trigger automatic operations when conditions are met
+   
+    - Notifications  
+    - Write-through to linked records  
+    - Spawn child processes  
+    - Generate auto-codes (e.g. DNA, TSK IDs)
 
 ---
 
