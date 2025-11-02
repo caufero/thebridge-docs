@@ -5,7 +5,7 @@ The specification follows a JSON-based structure, which can be parsed and execut
 
 ---
 
-### 9.2 JSON Definition
+## 9.2 JSON Definition
 
 ```json
 {
