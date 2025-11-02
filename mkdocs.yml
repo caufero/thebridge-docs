@@ -44,13 +44,10 @@ extra_javascript:
       
 plugins:
   - search
-  - with-pdf:
-      output_path: pdf/TheBridge-Technical-Specifications.pdf
-      cover_title: "The Bridge – Technical Specifications"
-      cover_subtitle: "Working Technical Specifications"
-      author: "Caufero & Luca Meggiolaro"
-      toc_title: "Contents"
-      ordered_chapters: true
+  - pdf-export:
+      combined: true
+      combined_output_path: pdf/TheBridge-Technical-Specifications.pdf
+      media_type: print
 
 nav:
   - Home: index.md
