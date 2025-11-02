@@ -1,13 +1,11 @@
-## 9. Workflow Specification
-
-### 9.1 Description
+## 9.1 Description
 This section defines the workflow configuration for process-driven entities such as calls, tickets, or tasks.  
 It outlines the **states**, **transitions**, and **automations** that determine how an entity moves through its lifecycle.  
 The specification follows a JSON-based structure, which can be parsed and executed dynamically by the system.
 
 ---
 
-### 9.2 JSON Definition
+## 9.2 JSON Definition
 
 ```json
 {
