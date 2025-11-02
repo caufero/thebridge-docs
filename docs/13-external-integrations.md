@@ -1,6 +1,4 @@
-## 13. External Integrations
-
-### 13.1 Google Drive Principles
+## 13.1 Google Drive Principles
 
 - Not every entity automatically generates folders — this is **configurable in Process Manager**
 - Admin can define:
@@ -12,7 +10,9 @@
  
 - Example: PHO may generate a folder, but TSK or LOG may not
 
-#### 13.1.1 Implementation Example
+---
+
+### 13.1.1 Implementation Example
 
 ```js
 // Google Drive Integration for Document Storage
@@ -45,7 +45,7 @@ const driveIntegration = {
 
 ---
 
-### 13.2 E-mail Notifications via Templates
+## 13.2 E-mail Notifications via Templates
 
 ```FileMaker
 # FileMaker Send Mail Script
@@ -66,7 +66,7 @@ Send Mail [
 
 ---
 
-### 13.3 SMS for Urgencies
+## 13.3 SMS for Urgencies
 
 ```json
 {
@@ -84,7 +84,7 @@ Send Mail [
 
 ---
 
-### 13.4 CRM Integration (Salesforce)
+## 13.4 CRM Integration (Salesforce)
 
 ```json
 {
