@@ -3,7 +3,7 @@
 ### 16.1 Email Notifications  
 - Actions defined in **Rules Engine** can trigger automatic email notifications  
 - Target recipients may include:
-- 
+  
       - Individual users  
       - Process **Responsible** or **Controller**  
       - Entire departments (e.g. Sales, Technical)
